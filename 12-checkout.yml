@@ -1,0 +1,70 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  namespace: frontend
+  name: checkout-dep
+spec:
+  replicas: 1
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+  selector:
+    matchLabels:
+      app: checkout
+  template:
+    metadata:
+      labels:
+        app: checkout
+    spec:
+      containers:
+      - name: checkout-con
+        image: golang:1.15-alpine
+        ports:
+        - containerPort: 5050
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: checkout-svc
+spec:
+  selector:
+    app: checkout
+  ports:
+  - port: 5050
+    targetPort: 5050
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: checkout-config
+data:
+  checkout-config:
+    product_catalog_service_addr productcatalogservice:3550
+    shipping_service_addr shippingservice:50051
+    cart_service_addr cartservice:7070
+    currency_service_addr currencyservice:7000
+    checkout_service_addr checkoutservice:5050
+    recommendation_service_addr recommendationservice:8080
+    ad_service_addr adservice:9555
+    port 8080
+---
+apiVersion: autoscaling/v2
+kind: HorizontalPodAutoscaler
+metadata:
+  name: checkout-dep
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: checkout-dep
+  minReplicas : 1
+  maxReplicas : 3
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 70
