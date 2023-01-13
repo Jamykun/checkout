@@ -20,7 +20,7 @@ spec:
     spec:
       containers:
       - name: checkout-con
-        image: gcr.io/formationgcp-baptiste/pfr/checkout@sha256:0c1f8ee713ac123bef46adff0cd192e6a742512ee613bb0bdd4ea9f6561344e1
+        image: gcr.io/$PROJECT_ID/pfr/checkout:latest_$SHORT_SHA
         ports:
         - containerPort: 5050
         env:
