@@ -8,8 +8,8 @@ spec:
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 2
-      maxUnavailable: 1
+      maxSurge: 1
+      maxUnavailable: 0
   selector:
     matchLabels:
       app: checkout
@@ -23,6 +23,11 @@ spec:
         image: gcr.io/formationgcp-baptiste/pfr/checkout:latest_$SHORT_SHA
         ports:
         - containerPort: 5050
+        resources:
+          limits:
+            cpu: 200m
+          requests:
+            cpu: 100m
         env:
           - name: PORT
             value: "5050"
@@ -59,8 +64,8 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: checkout-dep
-  minReplicas : 2
-  maxReplicas : 5
+  minReplicas : 1
+  maxReplicas : 3
   metrics:
     - type: Resource
       resource:
