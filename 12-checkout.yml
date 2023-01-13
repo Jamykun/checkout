@@ -22,13 +22,7 @@ spec:
       - name: checkout-con
         image: golang:1.15-alpine
         ports:
-        - containerPort: 5050
-        resources:
-          requests:
-            cpu: 100m
-          limits:
-            cpu: 200m
-         
+        - containerPort: 5050         
 ---
 apiVersion: v1
 kind: Service
