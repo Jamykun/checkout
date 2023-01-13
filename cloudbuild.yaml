@@ -14,7 +14,7 @@ steps:
   - 'CLOUDSDK_CONTAINER_CLUSTER=cluster-pfr-main'
 #step 3
 - name: 'gcr.io/cloud-builders/kubectl'
-id: Updade-manifest
+  id: Updade-manifest
   args: [
    'set', 
    'image', 
