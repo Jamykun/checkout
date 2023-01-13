@@ -8,8 +8,8 @@ spec:
   strategy:
     type: RollingUpdate
     rollingUpdate:
-      maxSurge: 1
-      maxUnavailable: 0
+      maxSurge: 2
+      maxUnavailable: 1
   selector:
     matchLabels:
       app: checkout
@@ -23,6 +23,12 @@ spec:
         image: golang:1.15-alpine
         ports:
         - containerPort: 5050
+        resources:
+          requests:
+            cpu: 100m
+          limits:
+            cpu: 200m
+         
 ---
 apiVersion: v1
 kind: Service
@@ -59,8 +65,8 @@ spec:
     apiVersion: apps/v1
     kind: Deployment
     name: checkout-dep
-  minReplicas : 1
-  maxReplicas : 3
+  minReplicas : 2
+  maxReplicas : 5
   metrics:
     - type: Resource
       resource:
