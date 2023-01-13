@@ -14,7 +14,7 @@ steps:
   - 'CLOUDSDK_CONTAINER_CLUSTER=cluster-pfr-main'
 #step 3
 - name: 'gcr.io/cloud-builders/kubectl'
-  id: Updade-manifest
+  id: Update-manifest
   args: [
    'set', 
    'image', 
@@ -29,4 +29,4 @@ steps:
 # Push the container image to Container Registry
 - name: 'gcr.io/cloud-builders/docker'
   id: Push
-  args: ['push', 'gcr.io/formationgcp-baptiste/pfr/checkout:latest_$SHORT_SHA']
+  args: ['push', 'gcr.io/formationgcp-baptiste/pfr/checkout:latest']
