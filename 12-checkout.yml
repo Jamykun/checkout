@@ -42,7 +42,7 @@ spec:
           - name: CURRENCY_SERVICE_ADDR
             value: "currencyservice:7000"
           - name: CART_SERVICE_ADDR
-            value: "cartservice:7070"
+            value: "cartservice-svc:7070"
 ---
 apiVersion: v1
 kind: Service
