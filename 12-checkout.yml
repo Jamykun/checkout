@@ -36,7 +36,7 @@ spec:
           - name: SHIPPING_SERVICE_ADDR
             value: "shipping:50051"
           - name: PAYMENT_SERVICE_ADDR
-            value: "paymentservice:50051"
+            value: "paymentservice:50052"
           - name: EMAIL_SERVICE_ADDR
             value: "email:5000"
           - name: CURRENCY_SERVICE_ADDR
